@@ -1,4 +1,4 @@
-import {React} from "react";
+import {React, useEffect} from "react";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import {HashRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./components/Home";
@@ -7,18 +7,22 @@ import Articles from "./components/Articles";
 import ArticleDetail from "./components/ArticleDetail";
 import About from "./components/About";
 import {getAuthorHost, getProtocol, getService} from "./utils/fetchData";
+import {getQueryStringForHashRouting} from "./utils/commons";
 import logo from "./images/wknd-logo-dk.svg";
 import "./App.scss";
 
-const NavMenu = () => (
-  <nav>
-    <ul className="menu">
-      <li><a href={`#/${window.location.search}`}>Adventures</a></li>
-      <li><a href={`#/articles${window.location.search}`}>Magazine</a></li>
-      <li><a href={`#/aboutus${window.location.search}`}>About Us</a></li>
-    </ul>
-  </nav>
-);
+const NavMenu = () => {
+	const query = getQueryStringForHashRouting();
+	return (
+		<nav>
+			<ul className="menu">
+				<li><a href={`#/${query}`}>Adventures</a></li>
+				<li><a href={`#/articles${query}`}>Magazine</a></li>
+				<li><a href={`#/aboutus${query}`}>About Us</a></li>
+			</ul>
+		</nav>
+	);
+};
 
 const Header = () => {
   return (
@@ -39,14 +43,23 @@ const Footer = () => (
 );
 
 function App() {
-  return (
-    <HelmetProvider>
-      <div className="App">
-        <Helmet>
-          <meta name="urn:adobe:aue:system:aemconnection" content={`${getProtocol()}:${getAuthorHost()}`}/>
-            { getService() && <meta name="urn:adobe:aue:config:service" content={getService()}/> }
-        </Helmet>
-        <Router>
+	// With hash routing, keep query params only in the hash to avoid duplication
+	useEffect(() => {
+		if (window.location.search) {
+			const hash = window.location.hash || "#/";
+			const newHash = hash + (hash.includes("?") ? "" : window.location.search);
+			window.history.replaceState(null, "", window.location.pathname + newHash);
+		}
+	}, []);
+
+	return (
+		<HelmetProvider>
+			<div className="App">
+				<Helmet>
+					<meta name="urn:adobe:aue:system:aemconnection" content={`${getProtocol()}:${getAuthorHost()}`}/>
+					{ getService() && <meta name="urn:adobe:aue:config:service" content={getService()}/> }
+				</Helmet>
+				<Router>
           <Header />
           <hr/>
           <main>

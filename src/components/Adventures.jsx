@@ -12,6 +12,7 @@ import Loading from './base/Loading';
 import "./Adventures.scss";
 import Title from './base/Title';
 import {getImageURL} from "../utils/fetchData";
+import {getQueryStringForHashRouting} from "../utils/commons";
 
 function AdventureItem(props) {
     const editorProps = {
@@ -29,7 +30,7 @@ function AdventureItem(props) {
   return (
          <li className="adventure-item" {...editorProps}>
           <div className="adventure-image-card">
-          <Link to={`/adventure/${props.slug}${window.location.search}`}>
+          <Link to={`/adventure/${props.slug}${getQueryStringForHashRouting()}`}>
             <img className="adventure-item-image" src={`${getImageURL(props.primaryImage)}`}
                   alt={props.title} data-aue-prop="primaryImage" data-aue-type="media" data-aue-label="Image"/>
           </Link>

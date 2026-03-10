@@ -14,6 +14,7 @@ import Loading from './base/Loading';
 import "./Articles.scss";
 import { mapJsonRichText } from '../utils/renderRichText';
 import {getImageURL} from "../utils/fetchData";
+import {getQueryStringForHashRouting} from "../utils/commons";
 
 const Article = ({_path, title, synopsis, authorFragment, slug}) => {
     const editorProps = {
@@ -29,7 +30,7 @@ const Article = ({_path, title, synopsis, authorFragment, slug}) => {
                 alt={title} data-aue-prop="profilePicture" data-aue-type="media"/>
             </aside>
             <article>
-              <Link to={`/articles/article/${slug}${window.location.search}`}>
+              <Link to={`/articles/article/${slug}${getQueryStringForHashRouting()}`}>
                   <h3 data-id="title" data-aue-prop="title" data-aue-type="text">{title}</h3>
               </Link>
 
@@ -39,7 +40,7 @@ const Article = ({_path, title, synopsis, authorFragment, slug}) => {
                   {mapJsonRichText(synopsis.json)}
                 </div>
               }
-              <Link to={`/articles/article/${slug}${window.location.search}`}>
+              <Link to={`/articles/article/${slug}${getQueryStringForHashRouting()}`}>
                 <button>Read more</button>
               </Link>
             </article>

@@ -9,7 +9,7 @@ it.
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useGraphQL from '../api/useGraphQL';
-import { getArticle } from '../utils/commons';
+import { getArticle, getQueryStringForHashRouting } from '../utils/commons';
 import { mapJsonRichText } from '../utils/renderRichText';
 import Loading from './base/Loading';
 import "./Teaser.scss";
@@ -42,7 +42,7 @@ const Teaser = () => {
       <p>Latest article</p>
       <h1 data-aue-prop="title" data-aue-type="text" data-aue-label="Title">{title}</h1>
       {main && <div data-aue-prop="main" data-aue-type="richtext" data-aue-label="Description">{mapJsonRichText(main.json)}</div>}
-      <Link to={`/articles/article/aloha-spirits-in-northern-norway${window.location.search}`}>
+      <Link to={`/articles/article/aloha-spirits-in-northern-norway${getQueryStringForHashRouting()}`}>
         <button>Read more</button>
       </Link>
     </article>

@@ -7,6 +7,7 @@ it.
 */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getQueryStringForHashRouting } from '../utils/commons';
 import Container from './base/Container';
 import Title from './base/Title';
 import Text from './base/Text';
@@ -33,7 +34,7 @@ function Home() {
                     <Title resource="urn:aemconnection:/content/wknd/language-masters/en/jcr:content/root/container/container_1679842506/title" prop="jcr:title" type="text"/>
                     <Container resource="urn:aemconnection:/content/wknd/language-masters/en/faqs/jcr:content/root/container" type="container" />
                 </div>
-                <Link to={`/aboutus${window.location.search}`}>
+                <Link to={`/aboutus${getQueryStringForHashRouting()}`}>
                     <button className="dark">Read more</button>
                 </Link>
             </section>

@@ -12,4 +12,18 @@ function getArticle(data) {
 	return undefined;
 }
 
-export { getArticle };
+/**
+ * Returns the query string to use when building hash-routed links.
+ * Prefers the query string from the hash (e.g. #/path?foo=bar) so params
+ * are not duplicated when they also appear on the main URL.
+ */
+function getQueryStringForHashRouting() {
+	const hash = window.location.hash || "";
+	const qIndex = hash.indexOf("?");
+	if (qIndex >= 0) {
+		return hash.slice(qIndex);
+	}
+	return window.location.search;
+}
+
+export { getArticle, getQueryStringForHashRouting };

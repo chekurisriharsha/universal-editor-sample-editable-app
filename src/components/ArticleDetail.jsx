@@ -13,7 +13,7 @@ import Loading from './base/Loading';
 import {mapJsonRichText} from '../utils/renderRichText';
 import './AdventureDetail.scss';
 import useGraphQL from '../api/useGraphQL';
-import {getArticle} from '../utils/commons';
+import {getArticle, getQueryStringForHashRouting} from '../utils/commons';
 import {getImageURL} from "../utils/fetchData";
 
 function ArticleDetail({article}) {
@@ -82,7 +82,7 @@ function ArticleDetailRender({
 function NoArticleFound() {
 	return (
 		<div className="adventure-detail">
-			<Link className="adventure-detail-close-button" to={`/${window.location.search}`}>
+			<Link className="adventure-detail-close-button" to={`/${getQueryStringForHashRouting()}`}>
 				<img className="Backbutton-icon" src={backIcon} alt="Return"/>
 			</Link>
 			<Error errorMessage="Missing data, article could not be rendered."/>

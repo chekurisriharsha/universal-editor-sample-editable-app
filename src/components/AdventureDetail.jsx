@@ -14,6 +14,7 @@ import {mapJsonRichText} from '../utils/renderRichText';
 import './AdventureDetail.scss';
 import useGraphQL from '../api/useGraphQL';
 import {getImageURL} from "../utils/fetchData";
+import {getQueryStringForHashRouting} from "../utils/commons";
 
 function AdventureDetail() {
 	// params hook from React router
@@ -122,7 +123,7 @@ function AdventureDetailRender({
 function NoAdventureFound() {
 	return (
 		<div className="adventure-detail">
-			<Link className="adventure-detail-close-button" to={`/${window.location.search}`}>
+			<Link className="adventure-detail-close-button" to={`/${getQueryStringForHashRouting()}`}>
 				<img className="Backbutton-icon" src={backIcon} alt="Return"/>
 			</Link>
 			<Error errorMessage="Missing data, adventure could not be rendered."/>
