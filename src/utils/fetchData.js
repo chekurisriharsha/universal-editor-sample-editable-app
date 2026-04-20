@@ -11,7 +11,7 @@ export const getAuthorHost = () => {
     if (searchParams.has("authorHost")) {
         return searchParams.get("authorHost");
     } else {
-        return "https://author-p7452-e12433.adobeaemcloud.com";
+        return "https://author-p169502-e1812163.adobeaemcloud.com";
     }
 }
 
